@@ -1,4 +1,9 @@
 <h1 class="d-flex justify-content-center align-items-center m-3">
-    Welcome to AUTH PAGE
-  </h1>
+  Welcome to AUTH PAGE
+</h1>
+<div *ngIf="users && !loading">
+  <ul *ngFor="let user of users">
+    <li>{{user.id}} - {{user.name}} - {{user.email}}</li>
+  </ul>
+</div>
   

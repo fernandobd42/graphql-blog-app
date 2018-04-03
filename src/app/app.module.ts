@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material';
 
+import { GraphQLModule } from "./graphql.module";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,9 @@ import {MatNativeDateModule} from '@angular/material';
     AppRoutingModule,
 
     BrowserAnimationsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
