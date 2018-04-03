@@ -13,14 +13,17 @@ import { Apollo } from "apollo-angular";
 export class AuthPageComponent implements OnInit {
 
   users
+  token
   constructor(
     private authService: AuthService,
     private router: Router,
     private apollo: Apollo
   ) { 
-    if (!this.authService.isLoggedIn()) {
+    if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/']);
     }
+
+    console.log('tokenn ', this.authService.getToken())    
   }
 
   displayUsers() {

@@ -23,7 +23,7 @@ export class LogInComponent {
   constructor(
     private fb: FormBuilder,
     private apollo: Apollo,
-    private router: Router,
+    private router: Router
   ) 
   {
     this.initialFormControls()
@@ -73,14 +73,13 @@ export class LogInComponent {
         }
       })
       .subscribe(({ data }) => {
-        console.log(data)
+        window.sessionStorage.setItem('token', JSON.stringify(data.createToken))
         this.router.navigate(['/auth']);
       },
       
       error => {
         this.loginError = error.message.replace('GraphQL error:', '');
     })
-  
   }
 
   clear(e) {

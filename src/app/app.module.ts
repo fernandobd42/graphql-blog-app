@@ -21,7 +21,8 @@ import { GraphQLModule } from "./graphql.module";
 
     GraphQLModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
