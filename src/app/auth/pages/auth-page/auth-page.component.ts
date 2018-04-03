@@ -41,7 +41,6 @@ export class AuthPageComponent implements OnInit {
     })
     .valueChanges
     .subscribe(users => {
-      console.log(users.data['users'])
       this.users = users.data['users'];
     });
     

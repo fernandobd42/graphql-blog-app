@@ -1,5 +1,5 @@
 <form [formGroup]="logInForm" class="d-flex justify-content-center align-items-center flex-column m-3" (ngSubmit)="save(logInForm)">
-    <mat-form-field class="w-25">
+    <mat-form-field class="col-8 col-sm-6 col-md-4">
       <input matInput placeholder="Email" [formControl]="emailFormControl"
               [errorStateMatcher]="matcher">
       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -10,7 +10,7 @@
       </mat-error>
     </mat-form-field>
   
-    <mat-form-field class="mt-3 w-25">
+    <mat-form-field class="mt-3 col-8 col-sm-6 col-md-4">
       <input matInput placeholder="Password" [formControl]="passwordFormControl"
               [errorStateMatcher]="matcher" type="password">
       <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
@@ -20,7 +20,9 @@
         Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-  
+    <mat-error *ngIf="loginError">
+      {{loginError}}
+    </mat-error>
     <div class="mt-3">
       <button mat-raised-button color="primary" class="mr-3" type="submit" [disabled]="logInForm.invalid || saving">Log In</button>
       <button mat-raised-button (click)="clear($event)" [disabled]="saving">Clear</button>

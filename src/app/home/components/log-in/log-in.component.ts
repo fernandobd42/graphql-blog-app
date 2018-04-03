@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { ReactiveErrorStateMatcherService } from './../../services/reactive-error-state-matcher.service';
+
+import gql from "graphql-tag";
+import { Apollo } from "apollo-angular";
 
 @Component({
   selector: 'app-log-in',
@@ -14,9 +18,12 @@ export class LogInComponent {
   matcher
   emailFormControl
   passwordFormControl
+  loginError
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private apollo: Apollo,
+    private router: Router,
   ) 
   {
     this.initialFormControls()
@@ -43,7 +50,37 @@ export class LogInComponent {
   }
 
   save(form) {
-    console.log(form);
+     const createNewToken = gql`
+      mutation createToken(
+        $email: String!
+        $password: String!
+      ) {
+        createToken(
+            email: $email
+            password: $password
+        ) {
+          token
+        }
+      }
+  `;
+
+  this.apollo
+      .mutate({
+        mutation: createNewToken,
+        variables: {
+          email: form.value.email,
+          password: form.value.password
+        }
+      })
+      .subscribe(({ data }) => {
+        console.log(data)
+        this.router.navigate(['/auth']);
+      },
+      
+      error => {
+        this.loginError = error.message.replace('GraphQL error:', '');
+    })
+  
   }
 
   clear(e) {
